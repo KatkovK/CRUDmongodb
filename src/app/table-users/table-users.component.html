@@ -1,0 +1,78 @@
+
+<button type="button" class="btn btn-primary m-3" (click)="openModal(add)">Create user</button>
+
+<table class="table table-striped">
+   <thead class="table-light">
+     <tr>
+       <th scope="col">#</th>
+       <th scope="col">Id</th>
+       <th scope="col">Name</th>
+       <th scope="col">Age</th>
+       <th></th>
+       <th></th>
+     </tr>
+   </thead>
+   <tbody *ngFor="let user of users">
+     <tr>
+       <td></td>
+       <td>{{user._id}}</td>
+       <td>{{user.name}}</td>
+       <td>{{user.age}}</td>
+       <td><button class="btn btn-success" (click)="openModalEdit(edit, user)">EDIT</button></td>
+       <td><button class="btn btn-danger" (click)="openModalDelete(delete, user._id)">DELETE</button></td>
+       
+     </tr>
+   </tbody>
+ </table>
+
+ <ng-template #add>
+   <div class="modal-header">
+     <h4 class="modal-title pull-left">Add</h4>
+     <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+       <span aria-hidden="true">&times;</span>
+     </button>
+   </div>
+   <div class="modal-body">
+     <form>
+        <label for="name">Name</label>
+        <input type="text" class="form-control" name="name" [(ngModel)]="user.name">
+        
+        <label for="age">Age</label>
+        <input type="text" class="form-control" name="age" [(ngModel)]="user.age">
+         <button class="btn btn-primary mt-2" (click)="addUser()">Add</button>
+      </form>
+   </div>
+ </ng-template>
+
+ <ng-template #edit>
+   <div class="modal-header">
+     <h4 class="modal-title pull-left">Edit</h4>
+     <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+       <span aria-hidden="true">&times;</span>
+     </button>
+   </div>
+   <div class="modal-body">
+     <form>
+        <label for="name">Name</label>
+        <input type="text" class="form-control" name="name" [(ngModel)]="editUser.name">
+        
+        <label for="age">Age</label>
+        <input type="text" class="form-control" name="age" [(ngModel)]="editUser.age">
+         <button class="btn btn-primary mt-2" (click)="updateUser()">Update</button>
+      </form>
+   </div>
+ </ng-template>
+
+ <ng-template #delete>
+   <div class="modal-header">
+     <h4 class="modal-title pull-left">DELETE</h4>
+     <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+       <span aria-hidden="true">&times;</span>
+     </button>
+   </div>
+   <div class="modal-body">
+     <p>Are you sure?</p>
+     <button (click)="modalRef.hide()" class="btn btn-primary m-2">No</button>
+     <button (click)="deleteUser()" class="btn btn-danger m-2">Yes</button>
+   </div>
+ </ng-template>
